@@ -21,7 +21,7 @@ export function PostsPage() {
 
   const handleIndex = () => {
     axios.get("http://localhost:3000/posts.json").then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       // posts = response.data;
       setPosts(response.data);
     });
@@ -30,13 +30,13 @@ export function PostsPage() {
   const [isPostsShowVisible, setIsPostShowVisible] = useState(false);
 
   const handleShow = (post) => {
-    console.log("handleShow", post);
+    // console.log("handleShow", post);
     setIsPostShowVisible(true);
     setCurrentPost(post);
   };
 
   const handleCreate = (params) => {
-    console.log("handleCreate");
+    // console.log("handleCreate");
     axios.post("http://localhost:3000/posts.json", params).then((response) => {
       // console.log(response.data);
       // let copiedPosts = Array.from(posts);
@@ -48,6 +48,35 @@ export function PostsPage() {
     });
   };
 
+  const handleUpdate = (post, params) => {
+    // console.log("handleUpdate");
+    axios.patch(`http://localhost:3000/posts/${post.id}.json`, params).then((response) => {
+      // console.log(response.data);
+      // let UpdatedPosts = [];
+      // let index = 0;
+      // while (index < posts.length) {
+      //   if (posts[index].id === response.data.id){
+      //     updatedPosts.push(response.data)
+      //   } else {
+      //     updatedPosts.push(posts[index])
+      //   }
+      //   index += 1
+      // }
+      // setPosts(updatedPosts);
+      setPosts(posts.map((p) => (p.id === response.data.id ? response.data : p)));
+      setIsPostShowVisible(false);
+    });
+  };
+
+  const handleDestroy = (post) => {
+    // console.log("handleDestroy", post);
+    axios.delete(`http://localhost:3000/posts/${post.id}.json`).then((response) => {
+      // console.log(response.data);
+      setPosts(posts.filter((p) => p.id !== post.id));
+      setIsPostShowVisible(false);
+    });
+  };
+
   useEffect(handleIndex, []);
 
   return (
@@ -55,7 +84,7 @@ export function PostsPage() {
       <PostsNew onCreate={handleCreate} />
       <PostsIndex postsProp={posts} onShow={handleShow} isPostsShowVisible />
       <Modal show={isPostsShowVisible} onClose={() => setIsPostShowVisible(false)}>
-        <PostsShow post={currentPost} />
+        <PostsShow post={currentPost} onUpdate={handleUpdate} onDestroy={handleDestroy} />
       </Modal>
     </div>
   );
