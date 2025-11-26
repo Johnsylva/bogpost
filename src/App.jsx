@@ -5,6 +5,10 @@ import "./App.css";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { PostsPage } from "./PostsPage";
+import axios from "axios";
+
+axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.withCredentials = true;
 
 function App() {
   return (

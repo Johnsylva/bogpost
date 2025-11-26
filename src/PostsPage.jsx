@@ -20,7 +20,7 @@ export function PostsPage() {
   // function to update the state variable - setPosts
 
   const handleIndex = () => {
-    axios.get("http://localhost:3000/posts.json").then((response) => {
+    axios.get("./posts.json").then((response) => {
       // console.log(response.data);
       // posts = response.data;
       setPosts(response.data);
@@ -37,7 +37,7 @@ export function PostsPage() {
 
   const handleCreate = (params) => {
     // console.log("handleCreate");
-    axios.post("http://localhost:3000/posts.json", params).then((response) => {
+    axios.post("./posts.json", params).then((response) => {
       // console.log(response.data);
       // let copiedPosts = Array.from(posts);
       // copiedPosts.push(response.data);
@@ -50,7 +50,7 @@ export function PostsPage() {
 
   const handleUpdate = (post, params) => {
     // console.log("handleUpdate");
-    axios.patch(`http://localhost:3000/posts/${post.id}.json`, params).then((response) => {
+    axios.patch(`./posts/${post.id}.json`, params).then((response) => {
       // console.log(response.data);
       // let UpdatedPosts = [];
       // let index = 0;
@@ -70,7 +70,7 @@ export function PostsPage() {
 
   const handleDestroy = (post) => {
     // console.log("handleDestroy", post);
-    axios.delete(`http://localhost:3000/posts/${post.id}.json`).then((response) => {
+    axios.delete(`./posts/${post.id}.json`).then((response) => {
       // console.log(response.data);
       setPosts(posts.filter((p) => p.id !== post.id));
       setIsPostShowVisible(false);
