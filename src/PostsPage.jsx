@@ -1,10 +1,7 @@
-import { PostsIndex } from "./PostsIndex";
-import { PostsNew } from "./PostsNew";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Modal } from "./Modal";
-import { PostsShow } from "./PostsShow";
 
 export function PostsPage() {
   // where all the data comes from
@@ -80,7 +77,7 @@ export function PostsPage() {
   useEffect(handleIndex, []);
 
   return (
-    <div>
+    <div className="container">
       <PostsNew onCreate={handleCreate} />
       <PostsIndex postsProp={posts} onShow={handleShow} isPostsShowVisible />
       <Modal show={isPostsShowVisible} onClose={() => setIsPostShowVisible(false)}>

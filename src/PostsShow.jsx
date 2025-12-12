@@ -14,6 +14,22 @@ export function PostsShow({ post, onUpdate, onDestroy }) {
       <hr />
       <h2>Edit Post</h2>
       <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <strong>Tags: </strong>
+          {post.tags && post.tags.length > 0 ? (
+            post.tags.map((tag) => (
+              <span key={tag.id} className="badge bg-info me-1">
+                {tag.name}
+              </span>
+            )
+            )
+          ) : (
+            <span className="text-muted">No tags</span>
+          )
+          
+          }
+
+        </div>
         <div>
           Title: <input name="title" defaultValue={post.title} type="text" />
         </div>
