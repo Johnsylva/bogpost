@@ -1,9 +1,17 @@
 import axios from "axios";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { PostsNew } from "./PostsNew";
 
 export function PostsNewPage() {
+  const [tags, setTags] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.get("/tags.json").then((response) => {
+      setTags(response.data);
+    });
+  }, []);
 
   // const handleCreate = (params) => {
   //   axios.post("/recipes.json", params).then((response) => {
@@ -29,7 +37,7 @@ export function PostsNewPage() {
   return (
     <div>
       <h1>New Post</h1>
-      <PostsNew onCreate={handleCreate} />
+      <PostsNew onCreate={handleCreate} tags={tags} />
     </div>
   );
 }
