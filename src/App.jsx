@@ -13,7 +13,9 @@ import { SignupPage } from "./SignupPage";
 import { LoginPage } from "./LoginPage";
 import { Footer } from "./Footer";
 
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL =
+  process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://blog-backend-xnlo.onrender.com"; // Replace with YOUR Render URL
+
 axios.defaults.withCredentials = true;
 
 const router = createBrowserRouter([
