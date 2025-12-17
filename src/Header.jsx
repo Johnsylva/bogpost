@@ -27,12 +27,12 @@ export function Header() {
               <Link className="nav-link active" aria-current="page" to="/">
                 Home
               </Link>{" "}
-              <a className="nav-link" href="#">
+              <Link className="nav-link active" aria-current="page" to="/posts">
                 All Post
-              </a>
-              <a className="nav-link" href="#">
+              </Link>
+              <Link className="nav-link active" aria-current="page" to="/posts/new">
                 New Post
-              </a>
+              </Link>
             </div>
           </div>
         </div>
